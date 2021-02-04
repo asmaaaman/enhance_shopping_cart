@@ -3,11 +3,11 @@ import * as Api from "../../Network/Api";
 import * as Action from "../actions/getProductListAction";
 import * as types from "../types/getProductsTypes";
 
-function* getProductsRequest({ payload }) {
+function* getProductsRequest() {
   try {
-    const response = yield call(Api.getProducts, payload);
+    const response = yield call(Api.getProducts);
 
-    yield put(Action.productListResponse(response));
+    yield put(Action.productListResponse(response.data));
     console.log("response", response);
   } catch (err) {
     alert("There is an error ");

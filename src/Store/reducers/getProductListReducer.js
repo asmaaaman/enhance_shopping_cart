@@ -1,11 +1,6 @@
 import * as types from "../types/getProductsTypes";
 
-const INITIAL_STATE = {
-  products: [],
-  product: {},
-  fetching: false,
-  error: null,
-};
+const INITIAL_STATE = {};
 
 const productListReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
