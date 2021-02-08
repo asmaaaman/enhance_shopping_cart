@@ -1,39 +1,70 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import ShareIcon from "@material-ui/icons/Share";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    maxWidth: 345,
+    height: 665,
   },
-  paper: {
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
+  media: {
+    height: 255,
   },
 }));
 
-export default function NestedGrid() {
+export default function SingleProduct({ product }) {
   const classes = useStyles();
-
-  function FormRow() {
-    return (
-      <React.Fragment>
-        <Grid item xs={4}>
-          <Paper className={classes.paper}>item</Paper>
-        </Grid>
-      </React.Fragment>
-    );
-  }
+  const { id, title, image, description, price } = product;
+  const [expanded, setExpanded] = React.useState(false);
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={1} style={{ width: "100%", margin: "0px" }}>
-        <Grid container item xs={12} spacing={3}>
-          <FormRow />
-        </Grid>
-      </Grid>
-    </div>
+    <Card className={classes.root}>
+      <CardMedia className={classes.media} image={image} title={title} />
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="p"
+          component="p"
+          style={{
+            fontSize: "20px",
+            fontFamily: "-webkit-body",
+            color: "#3f51b5",
+          }}
+        >
+          {title}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          style={{ textAlign: "justify" }}
+        >
+          {description}
+        </Typography>
+        <span
+          style={{
+            fontSize: "20px",
+            fontFamily: "-webkit-body",
+            color: "#3f51b5",
+          }}
+        >
+          {price} $
+        </span>
+      </CardContent>
+    </Card>
   );
 }

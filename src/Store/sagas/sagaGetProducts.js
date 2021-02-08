@@ -10,6 +10,7 @@ function* getProductsRequest() {
     yield put(Action.productListResponse(response.data));
     console.log("response", response);
   } catch (err) {
+    console.log("error saga", err);
     alert("There is an error ");
   }
 }
