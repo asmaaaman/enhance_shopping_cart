@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as action from "../../Store/actions/getProductListAction";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 //style
@@ -40,11 +39,7 @@ const ProductList = (props) => {
               <React.Fragment key={product.id} className="">
                 <Grid className="mb-5" item xs={4}>
                   <br />
-                  <SingleProduct
-                    className=""
-                    key={product.id}
-                    product={product}
-                  />
+                  <SingleProduct key={product.id} product={product} />
                 </Grid>
               </React.Fragment>
             ))
