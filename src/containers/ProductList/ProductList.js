@@ -23,6 +23,7 @@ const ProductList = (props) => {
     dispatch(action.productListRequest());
   }, [dispatch]);
   const products = useSelector((state) => state.productListReducer.products);
+
   const { fetching, error } = props;
   const classes = useStyles();
 
@@ -36,7 +37,7 @@ const ProductList = (props) => {
             <p>Eroor...</p>
           ) : products && products.length > 0 ? (
             products.map((product) => (
-              <React.Fragment key={product.id} className="">
+              <React.Fragment key={product.id}>
                 <Grid className="mb-5" item xs={4}>
                   <br />
                   <SingleProduct key={product.id} product={product} />

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import Btn from "../../components/Btn/Btn";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     height: 665,
   },
   media: {
-    height: 255,
+    height: 160,
   },
 }));
 
@@ -21,16 +23,19 @@ export default function SingleProduct({ product }) {
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        component="img"
-        className={classes.media}
-        image={image}
-        title={title}
-      />
-      <CardContent>
+      <Link to={`/details/${product.id}`}>
+        <CardMedia
+          style={{ objectFit: "contain" }}
+          component="img"
+          className={classes.media}
+          image={image}
+          title={title}
+        />
+      </Link>
+
+      <CardContent style={{ height: "250px", overflowY: "scroll" }}>
         <Typography
           gutterBottom
-          variant="p"
           component="p"
           style={{
             fontSize: "20px",
@@ -48,7 +53,7 @@ export default function SingleProduct({ product }) {
         >
           {description}
         </Typography>
-        <span
+        <p
           style={{
             fontSize: "20px",
             fontFamily: "-webkit-body",
@@ -56,8 +61,9 @@ export default function SingleProduct({ product }) {
           }}
         >
           {price} $
-        </span>
+        </p>
       </CardContent>
+      <Btn />
     </Card>
   );
 }

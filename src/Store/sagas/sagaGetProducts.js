@@ -8,7 +8,18 @@ function* getProductsRequest() {
     const response = yield call(Api.getProducts);
 
     yield put(Action.productListResponse(response.data));
-    console.log("response", response);
+  } catch (err) {
+    alert("There is an error ");
+  }
+}
+
+//product details
+function* getProductsDetailsRequest(payload) {
+  try {
+    const response = yield call(Api.getSingleProductDetails, payload.payload);
+
+    yield put(Action.productDetailsResponse(response.data));
+    console.log("response single product", response);
   } catch (err) {
     console.log("error saga", err);
     alert("There is an error ");
@@ -16,4 +27,8 @@ function* getProductsRequest() {
 }
 export function* getProductsSaga() {
   yield takeLatest(types.GET_PRODUCTLIST_REQUEST, getProductsRequest);
+  yield takeLatest(
+    types.GET_PRODUCT_DETAILS_REQUEST,
+    getProductsDetailsRequest
+  );
 }

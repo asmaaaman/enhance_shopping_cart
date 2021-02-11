@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,6 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as action from "../../Store/actions/getProductListAction";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,19 +38,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProductDetails() {
+export default function ProductDetails({ productDetails }) {
   const classes = useStyles();
   const theme = useTheme();
-
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const productsDetails = useSelector(
+    (state) => state.productListReducer.product
+  );
+  console.log("product Details page", productsDetails);
+  useEffect(() => {
+    dispatch(action.getProductDetailsRequest(id));
+  }, [dispatch]);
+  const { image, description } = productsDetails;
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Live From Space
+            {productsDetails.title}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+            {description}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
